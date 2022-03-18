@@ -1,0 +1,17 @@
+### FILES ###
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+
+### DIRECTORIES ###
+# Node Modules
+.node_modules
+node_modules
+*/node_modules
+/node_modules/*
+
+# JetBrains
+.idea/
