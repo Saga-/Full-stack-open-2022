@@ -32,7 +32,7 @@ const Statistics = ({ good, bad, neutral }) => {
   const positive = total === 0 ? 0 : (good / total) * 100;
   const header = <h1>statistics</h1>
 
-  if (good === 0 && bad === 0 && neutral === 0) {
+  if (total === 0) {
     return (
       <div>
         {header}
@@ -44,12 +44,16 @@ const Statistics = ({ good, bad, neutral }) => {
   return (
     <div>
       {header}
-      <StatisticLine text={'good'} value={good} />
-      <StatisticLine text={'neutral'} value={neutral} />
-      <StatisticLine text={'bad'} value={bad} />
-      <StatisticLine text={'all'} value={total} />
-      <StatisticLine text={'average'} value={avg} />
-      <StatisticLine text={'positive '} value={positive + ' %'} />
+      <table>
+        <tbody>
+          <StatisticLine text={'good'} value={good} />
+          <StatisticLine text={'neutral'} value={neutral} />
+          <StatisticLine text={'bad'} value={bad} />
+          <StatisticLine text={'all'} value={total} />
+          <StatisticLine text={'average'} value={avg} />
+          <StatisticLine text={'positive '} value={positive + ' %'} />
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -62,7 +66,10 @@ const Button = ({ onClick, text }) => {
 
 const StatisticLine = ({ value, text }) => {
   return (
-    <div>{text} {value} </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
