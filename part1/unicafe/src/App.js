@@ -28,7 +28,6 @@ const App = () => {
 const Statistics = ({ good, bad, neutral }) => {
   const total = good + bad + neutral;
   const avg = total === 0 ? 0 : (good - bad) / total;
-  // Turn to string to render % symbol in child
   const positive = total === 0 ? 0 : (good / total) * 100;
   const header = <h1>statistics</h1>
 
@@ -51,7 +50,7 @@ const Statistics = ({ good, bad, neutral }) => {
           <StatisticLine text={'bad'} value={bad} />
           <StatisticLine text={'all'} value={total} />
           <StatisticLine text={'average'} value={avg} />
-          <StatisticLine text={'positive '} value={positive + ' %'} />
+          <StatisticLine text={'positive'} value={positive + ' %'} />
         </tbody>
       </table>
     </div>
