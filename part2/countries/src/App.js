@@ -14,7 +14,6 @@ function App() {
       .get(url)
       .then(res => {
         setAllCountries(res.data)
-        console.log(allCountries);
       })
 
   }, [])

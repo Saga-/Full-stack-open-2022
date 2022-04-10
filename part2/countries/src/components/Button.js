@@ -8,9 +8,7 @@ export const Button = (props) => {
     toggledCountries.includes(country.name.common) ? setShow(true) : setShow(false)
   }, [])
 
-
   const toggleCountry = () => {
-    debugger;
     if (toggledCountries.includes(country.name.common)) {
       const countryIndex = toggledCountries.indexOf(country.name.common);
       const toggledCountriesCopy = [...toggledCountries];
@@ -22,7 +20,6 @@ export const Button = (props) => {
       toggledCountriesCopy.push(country.name.common);
       setToggledCountries(toggledCountriesCopy);
     }
-    console.log('toggledCountries', toggledCountries);
     setShow(!show)
   }
 

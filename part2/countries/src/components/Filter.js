@@ -9,13 +9,11 @@ export const Filter = (props) => {
       return false;
     })
     setFoundCountries(foundCountries);
-    console.log(foundCountries)
   }
 
   return (
      <div>find countries <input type="text" onChange={findCountry}/></div>
   )
-
 }
 
 export default Filter;
