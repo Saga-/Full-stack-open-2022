@@ -4,9 +4,9 @@ import Filter from './components/Filter';
 import Countries from './components/Countries';
 
 function App() {
-
   const [allCountries, setAllCountries] = useState([]);
   const [foundCountries, setFoundCountries] = useState([]);
+  const [toggledCountries, setToggledCountries] = useState([]);
 
   useEffect(() => {
     const url = 'https://restcountries.com/v3.1/all'
@@ -22,7 +22,7 @@ function App() {
   return (
     <div>
       <Filter allCountries={allCountries} setFoundCountries={setFoundCountries}/>
-      <Countries foundCountries={foundCountries} />
+      <Countries foundCountries={foundCountries} toggledCountries={toggledCountries} setToggledCountries={setToggledCountries}/>
     </div>
   )
 }
