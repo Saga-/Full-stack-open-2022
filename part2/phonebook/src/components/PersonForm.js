@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newNumber, persons }) => {
   const handleNameChange = (e) => {
     setNewName(e.target.value);
@@ -17,10 +19,20 @@ export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newN
         name: newName,
         number: newNumber
       };
-      setPersons(persons.concat(newPerson));
-      setNewName('');
-      setNewNumber('');
+      addPersonToServer(newPerson)
+        .then(() => {
+          setPersons(persons.concat(newPerson));
+          setNewName('');
+          setNewNumber('');
+        })
+        .catch(() => alert('Error: Person not saved'))
     }
+  }
+
+  const addPersonToServer = (newPerson) => {
+    const url = 'http://localhost:3001/persons'
+    return axios
+      .post(url, newPerson)
   }
 
   return(
