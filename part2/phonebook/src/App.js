@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import PersonForm from './components/PersonForm';
 import Filter from './components/Filter';
 import Persons from './components/Persons';
-import axios from 'axios';
+import personApiService from './services/personApiService';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,10 +11,8 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    const url = 'http://localhost:3001/persons'
-    axios
-      .get(url)
-      .then(res => setPersons(res.data))
+    personApiService.getAllPersons()
+      .then(persons => setPersons(persons))
   }, []);
 
   return (

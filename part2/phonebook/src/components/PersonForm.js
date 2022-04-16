@@ -1,4 +1,5 @@
 import axios from 'axios';
+import personApiService from '../services/personApiService';
 
 export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newNumber, persons }) => {
   const handleNameChange = (e) => {
@@ -19,7 +20,7 @@ export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newN
         name: newName,
         number: newNumber
       };
-      addPersonToServer(newPerson)
+      personApiService.addNewPerson(newPerson)
         .then(() => {
           setPersons(persons.concat(newPerson));
           setNewName('');
@@ -29,11 +30,6 @@ export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newN
     }
   }
 
-  const addPersonToServer = (newPerson) => {
-    const url = 'http://localhost:3001/persons'
-    return axios
-      .post(url, newPerson)
-  }
 
   return(
     <form>
