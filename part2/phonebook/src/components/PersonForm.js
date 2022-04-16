@@ -9,19 +9,37 @@ export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newN
     setNewNumber(e.target.value);
   }
 
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const alreadyExists = persons.find(person => person.name === newName);
-    if (alreadyExists) {
-      alert(`${newName} is already added to phonebook`);
-    } else {
+    const existingPersonArr = persons.filter(person => person.name === newName);
+    if (existingPersonArr.length) {
+       const existingPerson = existingPersonArr[0];
+      if (existingPerson.number === newNumber) {
+        alert(`${newName} is already added to phonebook`);
+      } else {
+        const msg = `${existingPerson.name} is already added to phonebook, replace the old number with a new one?`;
+        if (window.confirm(msg)) {
+          const newPerson = {
+            name: newName,
+            number: newNumber
+          };
+          personApiService.updatePerson(existingPerson.id, newPerson)
+            .then(() => personApiService.getAllPersons().then(res => setPersons(res))
+            )
+        }
+      }
+    }
+
+
+    else {
       const newPerson = {
         name: newName,
         number: newNumber
       };
       personApiService.addNewPerson(newPerson)
         .then(() => {
-          setPersons(persons.concat(newPerson));
+          personApiService.getAllPersons().then(res => setPersons(res));
           setNewName('');
           setNewNumber('');
         })
