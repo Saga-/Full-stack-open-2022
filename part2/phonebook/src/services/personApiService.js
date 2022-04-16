@@ -7,9 +7,14 @@ const getAllPersons = () => {
   return request.then(res => res.data);
 }
 
-const addNewPerson = () => {
-  const request = axios.post(baseUrl);
+const addNewPerson = (newPerson) => {
+  const request = axios.post(baseUrl, newPerson);
   return request.then(res => res.data);
 }
 
-export default { getAllPersons, addNewPerson }
+const deletePerson = id => {
+  const request = axios.delete(`${baseUrl}/${id}`);
+  return request.then(res => res.data)
+}
+
+export default { getAllPersons, addNewPerson, deletePerson }

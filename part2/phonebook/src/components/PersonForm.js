@@ -1,4 +1,3 @@
-import axios from 'axios';
 import personApiService from '../services/personApiService';
 
 export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newNumber, persons }) => {
