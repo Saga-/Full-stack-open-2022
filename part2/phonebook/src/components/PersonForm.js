@@ -1,6 +1,6 @@
 import personApiService from '../services/personApiService';
 
-export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newNumber, persons }) => {
+export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newNumber, persons, setMsg }) => {
   const handleNameChange = (e) => {
     setNewName(e.target.value);
   }
@@ -25,20 +25,28 @@ export const PersonForm = ({ setNewName, setNewNumber, setPersons, newName, newN
             number: newNumber
           };
           personApiService.updatePerson(existingPerson.id, newPerson)
-            .then(() => personApiService.getAllPersons().then(res => setPersons(res))
-            )
+            .then(() => {
+              personApiService.getAllPersons().then(res => setPersons(res.data))
+            })
+            .catch(() => {
+              setMsg({error: `Information of ${existingPerson.name} has already been removed from server`})
+              setTimeout(() => {
+                setMsg(null)
+              }, 5000)
+            });
         }
       }
-    }
-
-
-    else {
+    } else {
       const newPerson = {
         name: newName,
         number: newNumber
       };
       personApiService.addNewPerson(newPerson)
         .then(() => {
+          setMsg({success: `Added ${newPerson.name}`});
+          setTimeout(() => {
+            setMsg(null);
+          }, 5000)
           personApiService.getAllPersons().then(res => setPersons(res));
           setNewName('');
           setNewNumber('');

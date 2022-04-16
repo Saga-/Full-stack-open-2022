@@ -9,7 +9,7 @@ const getAllPersons = () => {
 
 const addNewPerson = (newPerson) => {
   const request = axios.post(baseUrl, newPerson);
-  return request.then(res => res.data);
+  return request.then(res => res.data).catch(e => e);
 }
 
 const deletePerson = id => {
