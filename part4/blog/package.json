@@ -4,11 +4,14 @@
   "description": "part4 of FullStackOpen2022",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "dev": "nodemon index.js"
   },
   "author": "Saga-",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
@@ -17,6 +20,7 @@
     "mongoose": "^6.3.1"
   },
   "devDependencies": {
+    "jest": "^28.0.3",
     "nodemon": "^2.0.16"
   }
 }
