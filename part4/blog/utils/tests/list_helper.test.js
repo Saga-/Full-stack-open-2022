@@ -47,3 +47,33 @@ describe('favouriteBlog', () => {
     expect(result).toEqual(expected);
   })
 })
+
+describe('mostBlogs', () => {
+  const blogs = [
+    {
+        "title": "Test",
+        "author": "Me",
+        "url": "localhost",
+        "likes": 300,
+        "id": "626fb93d4de4c5597eed918f"
+    },
+    {
+        "title": "Test2",
+        "author": "Me",
+        "url": "localhost",
+        "likes": 301,
+        "id": "626fbdd2f8fa76c21aadb403"
+    },
+    {
+        "title": "Test3",
+        "author": "You",
+        "url": "localhost",
+        "likes": 3,
+        "id": "626fbdd2f8fa76c21aadb403"
+    }
+  ];
+  it('should return the author with the most blogs', () => {
+    const result = listHelper.mostBlogs(blogs);
+    expect(result).toEqual({ author: 'Me', blogs: 2 });
+  })
+})
