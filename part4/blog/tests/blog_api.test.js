@@ -17,7 +17,7 @@ beforeEach(async () => {
 })
 
 
-describe('/api/blogs', () => {
+describe('GET /api/blogs', () => {
   const ENDPOINT = '/api/blogs';
 
   it('should return blogs as JSON', async () => {
@@ -34,13 +34,35 @@ describe('/api/blogs', () => {
 
   it('should return blogs with an _id property', async () => {
     const response = await api.get(ENDPOINT);
-    response.body.forEach(blog => expect(blog.id).toBeDefined())
-  })
-
+    response.body.forEach(blog => expect(blog.id).toBeDefined());
+  });
 })
+
+describe('POST api/blogs', () => {
+  const ENDPOINT = '/api/blogs';
+
+  it('should add a new blog post to the database', async () => {
+    const data = {
+      title: 'newBlog',
+      author: 'test',
+      url: 'localhost',
+      likes: 1448
+    };
+    await api
+      .post(ENDPOINT)
+      .send(data)
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    const response = await api.get(ENDPOINT);
+    const titles = response.body.map(blog => blog.title);
+    expect(response.body).toHaveLength(helper.initialBlogs.length + 1);
+    expect(titles).toContain('newBlog');
+  });
+});
 
 afterAll(() => {
-  mongoose.connection.close()
-})
+  mongoose.connection.close();
+});
 
 
