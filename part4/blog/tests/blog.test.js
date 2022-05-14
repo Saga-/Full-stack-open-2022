@@ -93,8 +93,30 @@ describe('POST api/blogs', () => {
     const response = await api.post(ENDPOINT).send(data).expect(400);
     expect(response.status).toEqual(400);
   })
-
 });
+
+describe('DELETE /api/blogs/:id', () => {
+  const ENDPOINT = '/api/blogs';
+  it('should delete a blog by ID', async () => {
+    const blogs = await Blog.find({});
+    await api.delete(`${ENDPOINT}/${blogs[0].id}`).expect(204);
+    const blogsNew = await Blog.find({});
+    expect(blogsNew.length).toEqual(blogs.length - 1);
+  })
+})
+
+describe('PUT /api.blogs/:id', () => {
+  const ENDPOINT = '/api/blogs';
+  it('should update the blog by ID', async () => {
+    const blogs = await Blog.find({});
+    const id = blogs[0].id;
+    await api.put(`${ENDPOINT}/${id}`).send({ likes: 500 }).expect(200);
+    const blog = await Blog.findById(id)
+    console.log(blog);
+    expect(blog.likes).toEqual(500);
+  })
+})
+
 
 afterAll(() => {
   mongoose.connection.close();
