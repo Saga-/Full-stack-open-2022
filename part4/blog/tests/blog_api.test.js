@@ -18,16 +18,23 @@ beforeEach(async () => {
 
 
 describe('/api/blogs', () => {
+  const ENDPOINT = '/api/blogs';
+
   it('should return blogs as JSON', async () => {
     await api
-      .get('/api/blogs')
+      .get(ENDPOINT)
       .expect(200)
       .expect('Content-Type', /application\/json/);
   })
 
   it('should return all blogs', async () => {
-    const response = await api.get('/api/blogs');
+    const response = await api.get(ENDPOINT);
     expect(response.body).toHaveLength(helper.initialBlogs.length);
+  })
+
+  it('should return blogs with an _id property', async () => {
+    const response = await api.get(ENDPOINT);
+    response.body.forEach(blog => expect(blog.id).toBeDefined())
   })
 
 })

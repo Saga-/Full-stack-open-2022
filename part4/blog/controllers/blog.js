@@ -1,4 +1,4 @@
-const blogRouter = require('express').Router()
+const blogRouter = require('express').Router();
 const Blog = require('../models/Blog');
 
 blogRouter.get('/api/blogs', async (request, response) => {
@@ -7,9 +7,9 @@ blogRouter.get('/api/blogs', async (request, response) => {
 })
 
 blogRouter.post('/api/blogs', async (request, response) => {
-  const newBlog = new Blog(request.body)
+  const newBlog = new Blog(request.body);
   const result = await newBlog.save();
   return response.status(201).json(result);
 })
 
-module.exports = blogRouter
+module.exports = blogRouter;
