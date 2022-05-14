@@ -6,7 +6,10 @@ blogRouter.get('/api/blogs', async (request, response) => {
   return response.json(blogs);
 })
 
-blogRouter.post('/api/blogs', async (request, response) => {
+blogRouter.post('/api/blogs', async (request, response, next) => {
+  if (!request.body.hasOwnProperty('likes')) {
+    request.body.likes = 0;
+  }
   const newBlog = new Blog(request.body);
   const result = await newBlog.save();
   return response.status(201).json(result);
