@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const supertest = require('supertest');
 
 const app = require('../app');
-const helper = require('./test_helper');
+const helper = require('./blog_test_helper');
 
 const Blog = require('../models/Blog');
 
@@ -112,11 +112,9 @@ describe('PUT /api.blogs/:id', () => {
     const id = blogs[0].id;
     await api.put(`${ENDPOINT}/${id}`).send({ likes: 500 }).expect(200);
     const blog = await Blog.findById(id)
-    console.log(blog);
     expect(blog.likes).toEqual(500);
   })
 })
-
 
 afterAll(() => {
   mongoose.connection.close();
