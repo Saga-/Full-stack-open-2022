@@ -1,12 +1,12 @@
 const blogRouter = require('express').Router();
 const Blog = require('../models/Blog');
 
-blogRouter.get('/api/blogs', async (request, response) => {
+blogRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({});
   return response.json(blogs);
 });
 
-blogRouter.post('/api/blogs', async (request, response, next) => {
+blogRouter.post('/', async (request, response, next) => {
   if (!request.body.hasOwnProperty('likes')) {
     request.body.likes = 0;
   }
@@ -15,7 +15,7 @@ blogRouter.post('/api/blogs', async (request, response, next) => {
   return response.status(201).json(result);
 });
 
-blogRouter.delete('/api/blogs/:id', async (request, response, next) => {
+blogRouter.delete('/:id', async (request, response, next) => {
   const blogToDelete = request.params.id;
   const result = await Blog.deleteOne({
     _id: blogToDelete
@@ -23,7 +23,7 @@ blogRouter.delete('/api/blogs/:id', async (request, response, next) => {
   return response.status(204).end();
 });
 
-blogRouter.put('/api/blogs/:id', async (request, response, next) => {
+blogRouter.put('/:id', async (request, response, next) => {
   const body = request.body;
 
   const blog = {

@@ -10,7 +10,11 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  likes: Number
+  likes: Number,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 }, { versionKey: false }); // For idempotence
 
 // We transform the RETURNED document by removing adding the id property equal to a stringified _id property
